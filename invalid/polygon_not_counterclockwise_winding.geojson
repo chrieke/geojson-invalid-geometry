@@ -1,6 +1,6 @@
 {
    "type":"FeatureCollection",
-   "name":"polygon_not_counterclockwise",
+   "name":"polygon_not_counterclockwise_winding",
    "features":[
       {
          "type":"Feature",
