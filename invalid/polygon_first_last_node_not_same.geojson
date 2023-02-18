@@ -1,0 +1,31 @@
+{
+   "type":"FeatureCollection",
+   "name":"polygon_first_last_node_not_same",
+   "features":[
+      {
+         "type":"Feature",
+         "properties":{
+
+         },
+         "geometry":{
+            "type":"Polygon",
+            "coordinates":[
+               [
+                  [
+                     13.376850862483192,
+                     52.512151692601506
+                  ],
+                  [
+                     13.377907135576489,
+                     52.511566969996288
+                  ],
+                  [
+                     13.376888586522238,
+                     52.510944523352023
+                  ]
+               ]
+            ]
+         }
+      }
+   ]
+}
