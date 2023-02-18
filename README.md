@@ -1,3 +1,3 @@
 # invalid-geometries
 
-Vector data with invalid geometries for geometry validation testing
+GeoJSON vector data with invalid geometries (holes, self-intersection etc.)

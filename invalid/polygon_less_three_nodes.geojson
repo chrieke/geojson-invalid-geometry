@@ -1,0 +1,27 @@
+{
+   "type":"FeatureCollection",
+   "name":"polygon_less_three_nodes",
+   "features":[
+      {
+         "type":"Feature",
+         "properties":{
+
+         },
+         "geometry":{
+            "type":"Polygon",
+            "coordinates":[
+               [
+                  [
+                     13.377564691386727,
+                     52.515937555706095
+                  ],
+                  [
+                     13.377204504070836,
+                     52.515087094884983
+                  ]
+               ]
+            ]
+         }
+      }
+   ]
+}
