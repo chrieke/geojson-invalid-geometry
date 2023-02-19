@@ -1,6 +1,6 @@
 {
    "type":"FeatureCollection",
-   "name":"polygon_selfintersection_fixable",
+   "name":"polygon_selfintersection_small",
    "features":[
       {
          "type":"Feature",
