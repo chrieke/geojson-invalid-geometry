@@ -71,27 +71,31 @@ A Linestring with identical start and end node coordinates. A valid LineString c
 
 ## All geometry types
 
-### Coordinate reference system issues [📝](https://www.rfc-editor.org/rfc/rfc7946#section-4)
+### Coordinate reference system set [📝](https://www.rfc-editor.org/rfc/rfc7946#section-4)
 The GeoJSON specification defines all GeoJSON as being in
 the [WGS84](https://de.wikipedia.org/wiki/World_Geodetic_System_1984)
 coordinate reference system (CRS) with latitude / longitude decimal coordinates. Thus, the CRS does not need to be
 specified in the GeoJSON. In older GeoJSON specifications you could define alternative crs, however this can lead to
 interoparability issues with some tools/APIs if they ignore the crs definition and assume WGS84.
+[Example](all_geometry_types/crs_defined.geojson)
 
 ### Excessive coordinate precision [📝](https://www.rfc-editor.org/rfc/rfc7946#section-11.2)
 Allthough not mandatory, the GeoJSON specification recommends a coordinate precision of 6 decimal places. Using more
 than 6 decimal places may lead to issues with some tools/APIs and unncessarily increase the file size (6 decimal places
 corresponds to about 10cm of a GPS).
-
-### Geometry crosses the antimeridian [📝](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.9)
-A Polygon or LineString that extends across the 180th meridian can lead to interoparability issues, and instead
-should be cut in two as a MultiPolygon or MultiLineString. Also
-see ["The 180th Meridian"](https://macwright.com/2016/09/26/the-180th-meridian.html) by Tom MacWright.
+[Example](all_geometry_types/excessive_coordinate_precision.geojson)
 
 ### Invalid bounding box coordinate order [📝](https://www.rfc-editor.org/rfc/rfc7946#section-3)
 A `bbox` may be defined (but is not required) in the GeoJSON object to summarize the geometries on the Geometries,
 Features, or FeatureCollections level. If it is defined, the bbox coordinate order must conform
 to `[west, south, east, north]`.
+[Example](all_geometry_types/invalid_bounding_box_coordinate_order.geojson)
+
+### Geometry crosses the antimeridian [📝](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.9)
+A Polygon or LineString that extends across the 180th meridian can lead to interoparability issues, and instead
+should be cut in two as a MultiPolygon or MultiLineString. Also
+see ["The 180th Meridian"](https://macwright.com/2016/09/26/the-180th-meridian.html) by Tom MacWright. 
+[Example](all_geometry_types/geometry_crosses_the_antimeridian.geojson)
 
 ### More than three coordinates in a node
 A geometry's nodes/positions/vertices should consist of either two coordinates (order `[longitude, latitude]`) or three

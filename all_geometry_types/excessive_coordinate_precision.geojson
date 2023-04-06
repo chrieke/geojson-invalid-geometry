@@ -1,0 +1,25 @@
+{
+   "type":"FeatureCollection",
+   "name":"excessive_coordinate_precision.geojson",
+   "features":[
+      {
+         "type":"Feature",
+         "properties":{
+
+         },
+         "geometry":{
+            "type":"LineString",
+            "coordinates":[
+               [
+                  13.405035340036587111111,
+                  52.513887293624606111111
+               ],
+               [
+                  13.410119681148304111111,
+                  52.517532068548199111111
+               ]
+            ]
+         }
+      }
+   ]
+}
