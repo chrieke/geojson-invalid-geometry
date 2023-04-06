@@ -1,6 +1,6 @@
 {
    "type":"FeatureCollection",
-   "name":"polygon_less_four_nodes",
+   "name":"polygon_less_than_four_nodes",
    "features":[
       {
          "type":"Feature",

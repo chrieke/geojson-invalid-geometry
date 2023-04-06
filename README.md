@@ -15,9 +15,15 @@ For a general introduction to GeoJSON see [here](https://macwright.com/2015/03/2
 
 A [Polygon's](https://macwright.com/2015/03/23/geojson-second-bite.html#polygons) exterior ring (shell) and
 inner ring (hole) must have four or more coordinate positions (also called nodes or vertices). In order to define an
-area
-(compared to a line) at least three positions are required, plus the first and last node must be the same to close
+area (compared to a line) at least three positions are required, plus the first and last node must be the same to close
 the Polygon (see below).
+
+<details>
+  <summary>Example</summary>
+  
+  - [polygon/polygon_less_than_four_nodes.geojson](polygon/polygon_less_than_four_nodes.geojson)
+</details>
+
 
 ### Unclosed Polygon [📝](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6)
 
@@ -31,7 +37,7 @@ ring can be the same, as then the start/endpoint of the ring could not be identi
 
 ### Does not comply with right-hand rule [📝](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6)
 
-A Polygon's exterior ring must have counterclockwise winding order, the inner ring (defines hole cutouts) must be
+A Polygon's or MultiPolygons exterior ring must have counterclockwise winding order, the inner ring (defines hole cutouts) must be
 clockwise. This is often overlooked when manually creating polygons or converting from other formats.
 As an older specification version did not define the winding order, most tools will accept Polygons with invalid winding
 order, but not all. To fix this see e.g. [geojson-rewind](https://github.com/mapbox/geojson-rewind).

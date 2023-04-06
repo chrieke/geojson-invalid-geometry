@@ -1,6 +1,6 @@
 {
    "type":"FeatureCollection",
-   "name":"polygon_first_last_node_not_same",
+   "name":"polygon_unclosed_polygon",
    "features":[
       {
          "type":"Feature",
