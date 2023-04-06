@@ -1,4 +1,4 @@
-# ⚠️ invalid-geojson-geometry
+# 🗺️ invalid-geojson-geometry
 
 **List of GeoJSON geometry issues with example files**
 
@@ -54,14 +54,20 @@ However, especially for larger self-intersections this might lead to unintended 
 parts of the geometry could be removed by the operation. Here only a manual operation can fix the issue, by splitting of
 the geometry into multiple parts, or adding/removing nodes.
 
+## Linestring
+
+### Zero-length LineString
+A Linestring with with identical start and end node coordinates.
+
 ## All Geometries
 
-### More than three coordinates in a node [📝](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.1)
+### More than three coordinates in a node
 
-A geometry's nodes/positions/vertices must consist of either two coordinates (order `[longitude, latitude]`) or three
+A geometry's nodes/positions/vertices should consist of either two coordinates (order `[longitude, latitude]`) or three
 coordinates (`[longitude, latitude, elevation]`). Elevation is optional. In early versions of the GeoJSON specification, more than
-three coordinates were allowed, e.g. storing additional information like time etc. If input in some tools or APIs
-this may lead to errors or the additional values being ignored. The additional information must now be stored separately
+it was normal to store more than three coordinates, e.g. storing additional information like time etc. Technically still allowed 
+but [discouraged](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.1) by the current specification, if used in some tools or 
+APIs this may lead to errors or the additional values being ignored. The additional information should now be stored separately 
 in the properties of the feature.
 
 ### "3D coordinates" not accepted
@@ -79,7 +85,7 @@ A MultiPolygon, MultiLineString or MultiPoint has just one geometry. This works 
 
 ### Incorrect geometry data type
 
-For example, a Polygon geometry has type defined as LineString.
+For example, a geometry that can be identified as a Polygon by it's shape, has the geometry `type` defined as another type, e.g. LineString.
 
 ### Coordinate reference system issues [📝](https://www.rfc-editor.org/rfc/rfc7946#section-4)
 
@@ -105,5 +111,7 @@ A `bbox` may be defined (but is not required) in the GeoJSON object to summarize
 Features, or FeatureCollections level. If it is defined, the bbox coordinate order must conform
 to `[west, south, east, north]`.
 
-
-
+### Geometry or Feature not wrapped in a Feature or FeatureCollection [📝](https://www.rfc-editor.org/rfc/rfc7946#section-2)
+The GeoJSON specification allows not wrapping geometry or feature objects in a FeatureCollection. 
+Any GeoJSON object on its own is still a valid GeoJSON. However, some tools might expect a Feature and FeatureCollection 
+and the associated properties.
