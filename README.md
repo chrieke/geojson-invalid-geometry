@@ -67,8 +67,9 @@ the geometry into multiple parts, or adding/removing nodes.
 
 ### Zero-length LineString [📝](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.4)
 A Linestring with identical start and end node coordinates. A valid LineString contains two or more distinct positions.
+[Example](linestring/linestring_zero_length.geojson)
 
-## All Geometries
+## All geometry types
 
 ### Coordinate reference system issues [📝](https://www.rfc-editor.org/rfc/rfc7946#section-4)
 The GeoJSON specification defines all GeoJSON as being in
@@ -103,7 +104,7 @@ separately in the properties of the feature.
 ### "3D coordinates" not accepted
 As described above, the GeoJSON specification allows a third elevation/altitude coordinate of a node. However, some APIs
 or tools only accept the longitude and latitude pair.
-[Example](all_types/3d_coordinates.geojson)
+[Example](all_geometry_types/3d_coordinates.geojson)
 
 ### Disconnected geometries
 A single geometry object (e.g., Point, LineString or Polygon) has multiple, disconnected parts that should be
@@ -113,7 +114,7 @@ represented as a MultiPoint, MultiLineString or MultiPolygon.
 A MultiPoint, MultiLineString or MultiPolygon should represent multiple geometries of the same type
 (e.g. multiple Polygons within a MultiPolygon). While it is not invalid according to the GeoJSON specification, if
 a Multi-type object only contains a single geometry object, some tools might complain.
-[Example](all_types/multitype_geometry_with_just_one_geometry.geojson)
+[Example](all_geometry_types/multitype_geometry_with_just_one_geometry.geojson)
 
 ### Incorrect geometry data type
 For example, a geometry that can be identified as a Polygon by it's shape, has the geometry `type` defined as another
