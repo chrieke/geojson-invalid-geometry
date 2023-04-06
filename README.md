@@ -33,13 +33,8 @@ A Polygon's or MultiPolygons exterior ring must have counterclockwise winding or
 clockwise. This is according to the right-hand rule, which is often overlooked when manually creating Polygons or converting from other formats.
 As an older specification version did not define the winding order, most tools will accept Polygons with invalid winding
 order, but not all. 
-[Example](polygon/polygon_exterior_ring_not_counterclockwise_winding_order.geojson)
-[Example](polygon/polygon_inner_ring_not_clockwise_winding_order.geojson)
-
-### Inner and exterior Polygon rings intersect or cross
-The inner ring of a Polygon must not intersect or cross the exterior ring. Also no two inner rings
-may intersect or cross each other. The inner and exterior ring, as well as two inner rings may touch at a single point
-only.
+[Example 1](polygon/polygon_exterior_ring_not_counterclockwise_winding_order.geojson)
+[Example 2](polygon/polygon_inner_ring_not_clockwise_winding_order.geojson)
 
 ### Has holes
 A Polygon is allowed to have hole cutouts, this is a feature, not an issue. However, some APIs don't accept
@@ -47,6 +42,12 @@ Polygon geometries with holes as input (e.g. some satellite data providers where
 pricing). The holes can be removed by removing the
 Polygon's [inner ring](https://macwright.com/2015/03/23/geojson-second-bite.html#polygons) coordinates. 
 [Example](polygon/polygon_has_holes.geojson)
+
+### Inner and exterior Polygon rings intersect or cross
+The inner ring of a Polygon must not intersect or cross the exterior ring. Also no two inner rings
+may intersect or cross each other. The inner and exterior ring, as well as two inner rings may touch at a single point
+only.
+[Example](polygon/fc_polygon_inner_and_exterior_ring_cross.geojson)
 
 ### Self-intersection
 Here one or multiple parts of the geometry overlap another part of itself. Often found in complex geometry shapes,
