@@ -1,6 +1,6 @@
 {
    "type":"FeatureCollection",
-   "name":"polygon_does_not_comply_with_righthand_rule",
+   "name":"polygon_exterior_ring_not_counterclockwise_winding_order",
    "features":[
       {
          "type":"Feature",

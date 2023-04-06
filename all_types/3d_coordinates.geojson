@@ -1,6 +1,6 @@
 {
    "type":"FeatureCollection",
-   "name":"polygon_3d_coordinates",
+   "name":"3d_coordinates",
    "features":[
       {
          "id":"0",

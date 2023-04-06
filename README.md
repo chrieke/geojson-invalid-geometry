@@ -16,30 +16,28 @@ A [Polygon's](https://macwright.com/2015/03/23/geojson-second-bite.html#polygons
 inner ring (hole) must have four or more coordinate positions (also called nodes or vertices). In order to define an
 area (compared to a line) at least three positions are required, plus the first and last node must be the same to close
 the Polygon (see below).
-
-<details>
-  <summary>Example</summary>
-  
-  - [polygon/polygon_less_than_four_nodes.geojson](polygon/polygon_less_than_four_nodes.geojson)
-</details>
-
+[Example](polygon/polygon_less_than_four_nodes.geojson)
 
 ### Unclosed Polygon [📝](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6)
-The first and last node of a polygons exterior or inner ring must be the same with identical values. This signifies the
-start and endpoint of a closed Polygon.
+The first and last node of a Polygons exterior or inner ring must be the same with identical values. This signifies the
+start and endpoint of a closed Polygon. 
+[Example](polygon/polygon_unclosed_polygon.geojson)
 
 ### Has duplicate nodes [📝](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6)
 From the closed Polygon requirement (see above), results that no two other positions of the exterior or interior
-ring can be the same, as then the start/endpoint of the ring could not be identified.
+ring can be the same, as then the start/endpoint of the ring could not be identified. 
+[Example](polygon/polygon_has_duplicate_nodes.geojson)
 
-### Does not comply with right-hand rule [📝](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6)
+### Wrong winding order [📝](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6)
 A Polygon's or MultiPolygons exterior ring must have counterclockwise winding order, the inner ring (defines hole cutouts) must be
-clockwise. This is often overlooked when manually creating polygons or converting from other formats.
+clockwise. This is according to the right-hand rule, which is often overlooked when manually creating Polygons or converting from other formats.
 As an older specification version did not define the winding order, most tools will accept Polygons with invalid winding
-order, but not all. To fix this see e.g. [geojson-rewind](https://github.com/mapbox/geojson-rewind).
+order, but not all. 
+[Example](polygon/polygon_exterior_ring_not_counterclockwise_winding_order.geojson)
+[Example](polygon/polygon_inner_ring_not_clockwise_winding_order.geojson)
 
-### Inner and exterior polygon rings intersect or cross
-The inner ring of a polygon must not intersect or cross the exterior ring. Also no two inner rings
+### Inner and exterior Polygon rings intersect or cross
+The inner ring of a Polygon must not intersect or cross the exterior ring. Also no two inner rings
 may intersect or cross each other. The inner and exterior ring, as well as two inner rings may touch at a single point
 only.
 
@@ -47,7 +45,8 @@ only.
 A Polygon is allowed to have hole cutouts, this is a feature, not an issue. However, some APIs don't accept
 Polygon geometries with holes as input (e.g. some satellite data providers where the desired area is relevant for
 pricing). The holes can be removed by removing the
-Polygon's [inner ring](https://macwright.com/2015/03/23/geojson-second-bite.html#polygons) coordinates.
+Polygon's [inner ring](https://macwright.com/2015/03/23/geojson-second-bite.html#polygons) coordinates. 
+[Example](polygon/polygon_has_holes.geojson)
 
 ### Self-intersection
 Here one or multiple parts of the geometry overlap another part of itself. Often found in complex geometry shapes,
@@ -60,11 +59,13 @@ shapely). This dissolves the overlapping areas and usually is an okay solution f
 However, especially for larger self-intersections this might lead to unintended changes of the geometry, as significant
 parts of the geometry could be removed by the operation. Here only a manual operation can fix the issue, by splitting of
 the geometry into multiple parts, or adding/removing nodes.
+[Example 1](polygon/polygon_selfintersection_small.geojson) 
+[Example 2](polygon/polygon_selfintersection_large.geojson)
 
 ## Linestring
 
-### Zero-length LineString
-A Linestring with with identical start and end node coordinates.
+### Zero-length LineString [📝](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.4)
+A Linestring with identical start and end node coordinates. A valid LineString contains two or more distinct positions.
 
 ## All Geometries
 
@@ -101,6 +102,7 @@ separately in the properties of the feature.
 ### "3D coordinates" not accepted
 As described above, the GeoJSON specification allows a third elevation/altitude coordinate of a node. However, some APIs
 or tools only accept the longitude and latitude pair.
+[Example](all_types/3d_coordinates.geojson)
 
 ### Disconnected geometries
 A single geometry object (e.g., Point, LineString or Polygon) has multiple, disconnected parts that should be
@@ -110,6 +112,7 @@ represented as a MultiPoint, MultiLineString or MultiPolygon.
 A MultiPoint, MultiLineString or MultiPolygon should represent multiple geometries of the same type
 (e.g. multiple Polygons within a MultiPolygon). While it is not invalid according to the GeoJSON specification, if
 a Multi-type object only contains a single geometry object, some tools might complain.
+[Example](all_types/multitype_geometry_with_just_one_geometry.geojson)
 
 ### Incorrect geometry data type
 For example, a geometry that can be identified as a Polygon by it's shape, has the geometry `type` defined as another
