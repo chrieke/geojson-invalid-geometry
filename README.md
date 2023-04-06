@@ -72,8 +72,7 @@ A Linestring with identical start and end node coordinates. A valid LineString c
 ## All geometry types
 
 ### Coordinate reference system set [📝](https://www.rfc-editor.org/rfc/rfc7946#section-4)
-The GeoJSON specification defines all GeoJSON as being in
-the [WGS84](https://de.wikipedia.org/wiki/World_Geodetic_System_1984)
+The GeoJSON specification defines all GeoJSON as being in the [WGS84](https://de.wikipedia.org/wiki/World_Geodetic_System_1984)
 coordinate reference system (CRS) with latitude / longitude decimal coordinates. Thus, the CRS does not need to be
 specified in the GeoJSON. In older GeoJSON specifications you could define alternative crs, however this can lead to
 interoparability issues with some tools/APIs if they ignore the crs definition and assume WGS84.
@@ -97,6 +96,11 @@ should be cut in two as a MultiPolygon or MultiLineString. Also
 see ["The 180th Meridian"](https://macwright.com/2016/09/26/the-180th-meridian.html) by Tom MacWright. 
 [Example](all_geometry_types/geometry_crosses_the_antimeridian.geojson)
 
+### "3D coordinates" not accepted
+As described above, the GeoJSON specification allows a third elevation/altitude coordinate of a node. However, some APIs
+or tools only accept the longitude and latitude pair.
+[Example](all_geometry_types/3d_coordinates.geojson)
+
 ### More than three coordinates in a node
 A geometry's nodes/positions/vertices should consist of either two coordinates (order `[longitude, latitude]`) or three
 coordinates (`[longitude, latitude, elevation]`). Elevation is optional. In early versions of the GeoJSON specification,
@@ -104,14 +108,11 @@ more than it was normal to store more than three coordinates, e.g. storing addit
 allowed but [discouraged](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.1) by the current specification, if used in some
 tools or APIs this may lead to errors or the additional values being ignored. The additional information should now be stored
 separately in the properties of the feature.
+[Example](all_geometry_types/more_than_three_coordinates_in_node.geojson)
 
-### "3D coordinates" not accepted
-As described above, the GeoJSON specification allows a third elevation/altitude coordinate of a node. However, some APIs
-or tools only accept the longitude and latitude pair.
-[Example](all_geometry_types/3d_coordinates.geojson)
-
-### Disconnected geometries
-A single geometry object (e.g., Point, LineString or Polygon) has multiple, disconnected parts that should be
+### Incorrect geometry data type
+For example, a geometry that can be identified as a Polygon by its shape, has the geometry `type` defined as another
+type, e.g. LineString. Also a single geometry object (e.g., Point, LineString or Polygon) has multiple, disconnected parts that should be
 represented as a MultiPoint, MultiLineString or MultiPolygon.
 
 ### Multi-type Geometry with just one geometry object
@@ -120,12 +121,7 @@ A MultiPoint, MultiLineString or MultiPolygon should represent multiple geometri
 a Multi-type object only contains a single geometry object, some tools might complain.
 [Example](all_geometry_types/multitype_geometry_with_just_one_geometry.geojson)
 
-### Incorrect geometry data type
-For example, a geometry that can be identified as a Polygon by it's shape, has the geometry `type` defined as another
-type, e.g. LineString.
-
 ### Geometry or Feature not wrapped in a Feature or FeatureCollection
-
 The GeoJSON specification allows not wrapping geometry or feature objects in a FeatureCollection,
 see [spec](https://www.rfc-editor.org/rfc/rfc7946#section-2). Any GeoJSON object on its own is still a valid GeoJSON. 
 However, some tools might expect a Feature and FeatureCollection and the associated properties.
