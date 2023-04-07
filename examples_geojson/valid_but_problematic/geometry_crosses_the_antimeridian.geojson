@@ -1,7 +1,23 @@
 {
-"type": "FeatureCollection",
-"name": "geometry_crosses_the_antimeridian",
-"features": [
-{ "type": "Feature", "properties": { }, "geometry": { "type": "LineString", "coordinates": [ [ 13.388627075507042, 52.509032960845992 ], [ 20.390925844807196, -20.342349332474477 ] ] } }
-]
+  "type": "FeatureCollection",
+  "name": "geometry_crosses_the_antimeridian",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            13.388627075507042,
+            52.50903296084599
+          ],
+          [
+            20.390925844807196,
+            -20.342349332474477
+          ]
+        ]
+      }
+    }
+  ]
 }
