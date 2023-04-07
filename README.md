@@ -36,8 +36,8 @@ clockwise. This is according to the right-hand rule, which is often overlooked w
 As an older specification version did not define the winding order, most tools will accept Polygons with invalid winding
 order, but not all. 
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6),
-[Example 1](examples_geojson/invalid/polygon_exterior_ring_not_counterclockwise_winding_order.geojson),
-[Example 2](examples_geojson/invalid/polygon_interior_ring_not_clockwise_winding_order.geojson)
+[Example 1 - Exterior](examples_geojson/invalid/polygon_exterior_ring_not_counterclockwise_winding_order.geojson),
+[Example 2 - Interior](examples_geojson/invalid/polygon_interior_ring_not_clockwise_winding_order.geojson)
 
 ### Inner and exterior Polygon rings intersect or cross
 The inner ring of a Polygon must not intersect or cross the exterior ring. Also no two inner rings
@@ -85,11 +85,11 @@ causes issues in downstream applications thus is often rejected by APIs and tool
 
 A common approach for removing the self-intersections is applying a zero-buffer operation (e.g. `.buffer(0)` in
 shapely). This dissolves the overlapping areas and usually is an okay solution for small, undesired self-intersections.
-However, especially for larger self-intersections this might lead to unintended changes of the geometry, as significant
+However, especially for larger self-intersections (see example 2) this might lead to unintended changes of the geometry, as significant
 parts of the geometry could be removed by the operation. Here only a manual operation can fix the issue, by splitting of
 the geometry into multiple parts, or adding/removing nodes.
-[Example 1](examples_geojson/valid_but_problematic/polygon_selfintersection_small.geojson) 
-[Example 2](examples_geojson/valid_but_problematic/polygon_selfintersection_large.geojson)
+[Example 1 - Small](examples_geojson/valid_but_problematic/polygon_selfintersection_small.geojson) 
+[Example 2 - Large](examples_geojson/valid_but_problematic/polygon_selfintersection_large.geojson)
 
 ### Wrong bounding box coordinate order
 A `bbox` may be defined (but is not required) in the GeoJSON object to summarize the geometries on the Geometries,
@@ -113,8 +113,8 @@ In early versions of the GeoJSON specification, it was normal to store more than
 allowed but [discouraged](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.1) by the current specification, if used in some
 tools or APIs this may lead to errors or the additional values being ignored. The additional information should now be stored
 separately in the properties of the feature.
-[Example 1](examples_geojson/valid_but_problematic/3d_coordinates.geojson),
-[Example 2](examples_geojson/valid_but_problematic/4d_coordinates.geojson)
+[Example 1 - 3D coordinates](examples_geojson/valid_but_problematic/3d_coordinates.geojson),
+[Example 2 - 4D coordinates](examples_geojson/valid_but_problematic/4d_coordinates.geojson)
 
 ### Multi-type Geometry with just one geometry object
 A MultiPoint, MultiLineString or MultiPolygon should represent multiple geometries of the same type
