@@ -1,0 +1,29 @@
+{
+  "type": "FeatureCollection",
+  "name": "polygon_has_less_than_three_unique_nodes",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              13.377016272052487,
+              52.512418493881086
+            ],
+            [
+              13.378181866405896,
+              52.512849787775224
+            ],
+            [
+              13.377016272052487,
+              52.512418493881086
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      }
+    }
+  ]
+}
