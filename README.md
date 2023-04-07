@@ -1,6 +1,6 @@
-# 🗺️ invalid-geojson-geometry
+# 🗺️ geojson-invalid-geometry
 
-**List of GeoJSON geometry issues with example files**
+**🗺️ List of GeoJSON invalid geometry issues with example files**
 
 Ever encountered an *invalid geometry* error when dealing with GeoJSON? Even if a GeoJSON conforms to the
 [GeoJSON specification](https://www.rfc-editor.org/rfc/rfc7946), some tools or APIs might have issues with it.
