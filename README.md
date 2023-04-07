@@ -28,7 +28,7 @@ A [Polygon's](https://macwright.com/2015/03/23/geojson-second-bite.html#polygons
 inner ring must have four or more nodes: Three or more unique coordinate positions plus the first and last node must 
 be the equivalent to close the Polygon (see above). Otherwise the Polygon would not cover an area.
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6),
-[Example](examples_geojson/invalid/polygon_less_than_three_unique_nodes.geojson)
+[Example](examples_geojson/invalid/polygon_has_less_than_three_unique_nodes.geojson)
 
 ### Polygon has wrong winding order
 A Polygon's or MultiPolygons exterior ring must have counterclockwise winding order, the inner ring (defines hole cutouts) must be
@@ -37,13 +37,13 @@ As an older specification version did not define the winding order, most tools w
 order, but not all. 
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6),
 [Example 1](examples_geojson/invalid/polygon_exterior_ring_not_counterclockwise_winding_order.geojson),
-[Example 2](examples_geojson/invalid/polygon_inner_ring_not_clockwise_winding_order.geojson)
+[Example 2](examples_geojson/invalid/polygon_interior_ring_not_clockwise_winding_order.geojson)
 
 ### Inner and exterior Polygon rings intersect or cross
 The inner ring of a Polygon must not intersect or cross the exterior ring. Also no two inner rings
 may intersect or cross each other. The inner and exterior ring, as well as two inner rings may touch at a single point
 only.
-[Example](examples_geojson/invalid/fc_polygon_inner_and_exterior_ring_cross.geojson)
+[Example](examples_geojson/invalid/polygon_inner_and_exterior_ring_cross.geojson)
 
 ### Defined coordinate reference system (CRS)
 The GeoJSON specification defines all GeoJSON as being in the [WGS84](https://de.wikipedia.org/wiki/World_Geodetic_System_1984)
