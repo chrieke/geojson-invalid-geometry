@@ -1,1 +1,7 @@
-{"type": "FeatureCollection", "name": "multitype_geometry_with_just_one_geometry", "features": [{"type": "Feature", "properties": {}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[13.428921534325253, 52.51634866352462], [13.428899878953438, 52.517518053602615], [13.428618359119847, 52.517539708974425], [13.428640014491661, 52.51634866352462], [13.428921534325253, 52.51634866352462]]]]}}]}
+{
+"type": "FeatureCollection",
+"name": "multitype_geometry_with_just_one_geometry",
+"features": [
+{ "type": "Feature", "properties": { }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 13.387768852872727, 52.508488412562322 ], [ 13.386971144376782, 52.508312622395735 ], [ 13.386995067049925, 52.508116883075608 ], [ 13.387807603125205, 52.508295654030853 ], [ 13.387768852872727, 52.508488412562322 ] ] ] ] } }
+]
+}

@@ -7,8 +7,6 @@ Ever encountered an *invalid geometry* error when dealing with GeoJSON? Even if 
 This repo shows the common issues when handling GeoJSON geometries and how to fix them.
 For a general introduction to GeoJSON see [here](https://macwright.com/2015/03/23/geojson-second-bite.html).
 
-![](images/banner.png)
-
 ## Invalid by GeoJSON specification
 
 ![](images/invalid_examples.png)
@@ -60,9 +58,17 @@ A Linestring with identical start and end node coordinates. A valid LineString c
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.4),
 [Example](invalid/linestring_zero_length.geojson)
 
+### Incorrect geometry data type
+For example, a geometry that can be identified as a Polygon by its shape, has the geometry `type` defined as another
+type, e.g. LineString. Also when a single geometry object (e.g., Point, LineString or Polygon) has multiple, disconnected parts that should be
+represented as a MultiPoint, MultiLineString or MultiPolygon.
+[Example](invalid/incorrect_geometry_data_type.geojson)
+
 <br>
 
 ## Valid but problematic for some tools/APIs 
+
+![](images/valid_problematic.png)
 
 ### Polygon has holes
 A Polygon is allowed to have hole cutouts, this is a feature, not an issue. However, some APIs don't accept
@@ -93,18 +99,11 @@ to `[west, south, east, north]`.
 [Example](valid_but_problematic/wrong_bounding_box_coordinate_order.geojson)
 
 ### Excessive coordinate precision
-Allthough not mandatory, the GeoJSON specification recommends a coordinate precision of 6 decimal places. Using more
+Although not mandatory, the GeoJSON specification recommends a coordinate precision of 6 decimal places. Using more
 than 6 decimal places may lead to issues with some tools/APIs and unncessarily increase the file size (6 decimal places
 corresponds to about 10cm of a GPS).
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-11.2),
 [Example](valid_but_problematic/excessive_coordinate_precision.geojson)
-
-### Geometry crosses the antimeridian
-A Polygon or LineString that extends across the 180th meridian can lead to interoparability issues, and instead
-should be cut in two as a MultiPolygon or MultiLineString. Also
-see ["The 180th Meridian"](https://macwright.com/2016/09/26/the-180th-meridian.html) by Tom MacWright.
-[Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.9),
-[Example](valid_but_problematic/geometry_crosses_the_antimeridian.geojson)
 
 ### 3D or more coordinates not accepted
 A geometry's nodes/positions/vertices should consist of either two coordinates (order `[longitude, latitude]`) or three
@@ -116,11 +115,6 @@ tools or APIs this may lead to errors or the additional values being ignored. Th
 separately in the properties of the feature.
 [Example 1](valid_but_problematic/3d_coordinates.geojson),
 [Example 2](valid_but_problematic/4d_coordinates.geojson)
-
-### Incorrect geometry data type
-For example, a geometry that can be identified as a Polygon by its shape, has the geometry `type` defined as another
-type, e.g. LineString. Also when a single geometry object (e.g., Point, LineString or Polygon) has multiple, disconnected parts that should be
-represented as a MultiPoint, MultiLineString or MultiPolygon.
 
 ### Multi-type Geometry with just one geometry object
 A MultiPoint, MultiLineString or MultiPolygon should represent multiple geometries of the same type
@@ -134,5 +128,13 @@ see [spec](https://www.rfc-editor.org/rfc/rfc7946#section-2). Any GeoJSON object
 However, some tools might expect a Feature and FeatureCollection and the associated properties.
 
 ### Feature has no geometry
-A GeoJSON Feature is allowed to be unlocated, meaning it has `null` as a geometry member, see
+A GeoJSON Feature is allowed to be un-located, meaning it has `null` as a geometry member, see
 [spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.2). But some tools/APIs might expect a geometry and complain.
+[Example](valid_but_problematic/feature_has_no_geometry.geojson)
+
+### Geometry crosses the anti-meridian
+A Polygon or LineString that extends across the 180th meridian can lead to interoparability issues, and instead
+should be cut in two as a MultiPolygon or MultiLineString. Also
+see ["The 180th Meridian"](https://macwright.com/2016/09/26/the-180th-meridian.html) by Tom MacWright.
+[Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.9),
+[Example](valid_but_problematic/geometry_crosses_the_antimeridian.geojson)

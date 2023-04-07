@@ -1,7 +1,7 @@
 {
 "type": "FeatureCollection",
-"name": "excessive_coordinate_precision.geojson",
+"name": "polygon_has_duplicate_nodes",
 "features": [
-{ "type": "Feature", "properties": { }, "geometry": { "type": "LineString", "coordinates": [ [ 13.403137154920394, 52.513816990472158 ], [ 13.408221496032111, 52.517461765395751 ] ] } }
+{ "type": "Feature", "properties": { }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 13.383901633500789, 52.507951578431104 ], [ 13.384722640137346, 52.508217033158374 ], [ 13.385030517626012, 52.508544945607227 ], [ 13.384414762648623, 52.508716708294841 ], [ 13.383799007671234, 52.508466871436767 ], [ 13.383901633500789, 52.507951578431104 ] ] ] } }
 ]
 }

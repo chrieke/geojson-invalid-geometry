@@ -2,6 +2,6 @@
 "type": "FeatureCollection",
 "name": "geometry_crosses_the_antimeridian",
 "features": [
-{ "type": "Feature", "properties": { }, "geometry": { "type": "LineString", "coordinates": [ [ 13.414869245700441, 52.519417895495991 ], [ 20.417168015000595, -20.331964397824478 ] ] } }
+{ "type": "Feature", "properties": { }, "geometry": { "type": "LineString", "coordinates": [ [ 13.388627075507042, 52.509032960845992 ], [ 20.390925844807196, -20.342349332474477 ] ] } }
 ]
 }
