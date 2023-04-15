@@ -1,6 +1,6 @@
 {
   "type": "FeatureCollection",
-  "name": "polygon_has_duplicate_nodes",
+  "name": "incorrect_geometry_data_types",
   "features": [
     {
       "type": "Feature",
