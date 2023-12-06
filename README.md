@@ -32,9 +32,8 @@ be the equivalent to close the Polygon (see above). Otherwise the Polygon would 
 
 ### Polygon has wrong winding order
 A Polygon's or MultiPolygons exterior ring must have counterclockwise winding order, the inner ring (defines hole cutouts) must be clockwise. This is often overlooked when manually creating Polygons or converting from other formats. As an older specification version did not define the winding order, most tools will accept Polygons with invalid winding
-order, but not all. 
-
-In this context, many definitions use the right-hand rule: If you would walk along the ring in the order of the coordinates, if the area enclosed by the ring is on your right-hand side, it has a clockwise winding order; if it is on your left-hand side, it has a counter-clockwise winding order.
+order, but not all.   
+In this context, many definitions use the term "right-hand rule": If you would walk along the ring in the order of the coordinates, if the area enclosed by the ring is on your right-hand side, it has a clockwise winding order; if it is on your left-hand side, it has a counter-clockwise winding order.
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6),
 [Example 1 - Exterior](examples_geojson/invalid/polygon_exterior_ring_not_counterclockwise_winding_order.geojson),
 [Example 2 - Interior](examples_geojson/invalid/polygon_interior_ring_not_clockwise_winding_order.geojson)
