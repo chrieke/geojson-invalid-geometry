@@ -133,7 +133,7 @@ A GeoJSON Feature is allowed to be un-located, meaning it has `null` as a geomet
 
 ### Geometry crosses the anti-meridian
 A Polygon or LineString that extends across the 180th meridian can lead to interoparability issues, and instead
-should be cut in two as a MultiPolygon or MultiLineString. Also
-see ["The 180th Meridian"](https://macwright.com/2016/09/26/the-180th-meridian.html) by Tom MacWright.
+should be cut in two as a MultiPolygon or MultiLineString. The anti-meridian goes in vertical direction (north-south), the longitude at this line can be given as either east or west. 
+Also see ["The 180th Meridian"](https://macwright.com/2016/09/26/the-180th-meridian.html) by Tom MacWright.
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.9),
 [Example](examples_geojson/valid_but_problematic/geometry_crosses_the_antimeridian.geojson)
