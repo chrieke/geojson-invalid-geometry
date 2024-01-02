@@ -43,12 +43,17 @@ The inner rings (define hole cutouts) of a **Polygon** must be clockwise (often 
 the "exterior not ccw" criterium above. 
 [Example - Interior](examples_geojson/invalid/interior_not_cw.geojson)
 
-
 ### Inner and exterior Polygon rings intersect or cross
 The inner ring of a **Polygon** must not intersect or cross the exterior ring. Also, no two inner rings
 may intersect or cross each other. The inner and exterior ring, as well as two inner rings may touch at a single point
 only.
 [Example](examples_geojson/invalid/inner_and_exterior_ring_intersect.geojson)
+
+### Outside latitude/longitude boundary
+The GeoJSON specification defines all GeoJSON as being in the [WGS84](https://de.wikipedia.org/wiki/World_Geodetic_System_1984)
+coordinate reference system (CRS) with latitude / longitude decimal coordinates. Latitudes are specified within the range of [-90, 90]
+and Longitudes within [-180, 180].
+[Example](examples_geojson/invalid/outside_lat_lon_boundary.geojson)
 
 ### Coordinate reference system (CRS) defined
 The GeoJSON specification defines all GeoJSON as being in the [WGS84](https://de.wikipedia.org/wiki/World_Geodetic_System_1984)
