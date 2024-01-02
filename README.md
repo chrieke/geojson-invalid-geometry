@@ -17,23 +17,27 @@ must be the same, i.e. have identical values. This signifies the start and endpo
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6),
 [Example](examples_geojson/invalid/polygon_unclosed_polygon.geojson)
 
-### Polygon has duplicate nodes
+### Duplicate nodes
 From the closed Polygon requirement (see above), results that no two other positions of the exterior or interior
 ring can be the same, as then the start/endpoint of the ring could not be identified. 
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6), 
 [Example](examples_geojson/invalid/polygon_has_duplicate_nodes.geojson)
 
-### Polygon has less than three unique nodes
+### Less than three unique nodes
 A [Polygon's](https://macwright.com/2015/03/23/geojson-second-bite.html#polygons) exterior ring and
 inner ring must have four or more nodes: Three or more unique coordinate positions plus the first and last node must 
 be the equivalent to close the Polygon (see above). Otherwise the Polygon would not cover an area.
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6),
 [Example](examples_geojson/invalid/polygon_has_less_than_three_unique_nodes.geojson)
 
-### Polygon has wrong winding order
-A Polygon's or MultiPolygons exterior ring must have counterclockwise winding order, the inner ring (defines hole cutouts) must be clockwise. This is often overlooked when manually creating Polygons or converting from other formats. As an older specification version did not define the winding order, most tools will accept Polygons with invalid winding
+### Wrong winding order
+A Polygon's or MultiPolygons exterior ring must have counterclockwise winding order, the inner ring (defines hole cutouts) 
+must be clockwise. This is often overlooked when manually creating Polygons or converting from other formats. 
+As an older specification version did not define the winding order, most tools will accept Polygons with invalid winding
 order, but not all.   
-In this context, many definitions use the term "right-hand rule": If you would walk along the ring in the order of the coordinates, if the area enclosed by the ring is on your right-hand side, it has a clockwise winding order; if it is on your left-hand side, it has a counter-clockwise winding order.
+In this context, many definitions use the term "right-hand rule": If you would walk along the ring in the order of the 
+coordinates, if the area enclosed by the ring is on your right-hand side, it has a clockwise winding order; if it is on 
+your left-hand side, it has a counter-clockwise winding order.
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6),
 [Example 1 - Exterior](examples_geojson/invalid/polygon_exterior_ring_not_counterclockwise_winding_order.geojson),
 [Example 2 - Interior](examples_geojson/invalid/polygon_interior_ring_not_clockwise_winding_order.geojson)
@@ -59,8 +63,8 @@ A Linestring with identical start and end node coordinates. A valid LineString c
 
 ### Incorrect geometry data type
 For example, a geometry that can be identified as a Polygon by its shape, has the geometry `type` defined as another
-type, e.g. LineString. Also when a single geometry object (e.g., Point, LineString or Polygon) has multiple, disconnected parts that should be
-represented as a MultiPoint, MultiLineString or MultiPolygon.
+type, e.g. LineString. Also when a single geometry object (e.g., Point, LineString or Polygon) has multiple, disconnected 
+parts that should be represented as a MultiPoint, MultiLineString or MultiPolygon.
 [Example](examples_geojson/invalid/incorrect_geometry_data_type.geojson)
 
 <br>
@@ -84,9 +88,9 @@ causes issues in downstream applications thus is often rejected by APIs and tool
 
 A common approach for removing the self-intersections is applying a zero-buffer operation (e.g. `.buffer(0)` in
 shapely). This dissolves the overlapping areas and usually is an okay solution for small, undesired self-intersections.
-However, especially for larger self-intersections (see example 2) this might lead to unintended changes of the geometry, as significant
-parts of the geometry could be removed by the operation. Here only a manual operation can fix the issue, by splitting of
-the geometry into multiple parts, or adding/removing nodes.
+However, especially for larger self-intersections (see example 2) this might lead to unintended changes of the geometry, 
+as significant parts of the geometry could be removed by the operation. Here only a manual operation can fix the issue, 
+by splitting of the geometry into multiple parts, or adding/removing nodes.
 [Example 1 - Small](examples_geojson/valid_but_problematic/polygon_selfintersection_small.geojson) 
 [Example 2 - Large](examples_geojson/valid_but_problematic/polygon_selfintersection_large.geojson)
 
@@ -106,16 +110,17 @@ less than 1000. Even simple geometries can have a high number of nodes, e.g. whe
 A geometry's nodes/positions/vertices should consist of either two coordinates (order `[longitude, latitude]`) or three
 coordinates (`[longitude, latitude, elevation]`). Elevation is optional. Some tools and APIs may not accept 3D coordinates.
 
-In early versions of the GeoJSON specification, it was normal to store more than three coordinates, e.g. storing additional information like time etc. Technically still
-allowed but [discouraged](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.1) by the current specification, if used in some
-tools or APIs this may lead to errors or the additional values being ignored. The additional information should now be stored
-separately in the properties of the feature.
+In early versions of the GeoJSON specification, it was normal to store more than three coordinates, e.g. storing additional 
+information like time etc. Technically still allowed but [discouraged](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.1) 
+by the current specification, if used in some tools or APIs this may lead to errors or the additional values being ignored. 
+The additional information should now be stored separately in the properties of the feature.
 [Example 1 - 3D coordinates](examples_geojson/valid_but_problematic/3d_coordinates.geojson),
 [Example 2 - 4D coordinates](examples_geojson/valid_but_problematic/4d_coordinates.geojson)
 
-### Geometry crosses the anti-meridian
+### Crosses anti-meridian
 A Polygon or LineString that extends across the 180th meridian can lead to interoparability issues, and instead
-should be cut in two as a MultiPolygon or MultiLineString. The anti-meridian goes in vertical direction (north-south), the longitude at this line can be given as either east or west. 
+should be cut in two as a MultiPolygon or MultiLineString. The anti-meridian goes in vertical direction (north-south), 
+the longitude at this line can be given as either east or west. 
 Also see ["The 180th Meridian"](https://macwright.com/2016/09/26/the-180th-meridian.html) by Tom MacWright.
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.9),
 [Example](examples_geojson/valid_but_problematic/geometry_crosses_the_antimeridian.geojson)
