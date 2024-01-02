@@ -54,7 +54,8 @@ only.
 The GeoJSON specification defines all GeoJSON as being in the [WGS84](https://de.wikipedia.org/wiki/World_Geodetic_System_1984)
 coordinate reference system (CRS) with latitude / longitude decimal coordinates. Thus, the CRS does not need to be
 specified in the GeoJSON. In older GeoJSON specifications you could define alternative crs (as a "crs" key in the FeatureCollection).
-However this leads to interoperability issues with many tools/APIs, as they ignore the crs definition and assume latitude/longitude coordinates (WGS84).
+However this leads to interoperability issues with many tools/APIs, as they ignore the crs definition and assume 
+latitude/longitude coordinates (WGS84).
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-4),
 [Example](examples_geojson/invalid/crs_defined.geojson)
 
@@ -116,14 +117,13 @@ In early versions of the GeoJSON specification, it was normal to store more than
 information like time etc. Technically still allowed but [discouraged](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.1) 
 by the current specification, if used in some tools or APIs this may lead to errors or the additional values being ignored. 
 The additional information should now be stored separately in the properties of the feature.
-[Example 1 - 3D coordinates](examples_geojson/valid_but_problematic/more_than_2d_coordinates_3d.geojson),
-[Example 2 - 4D coordinates](examples_geojson/valid_but_problematic/more_than_2d_coordinates_4d.geojson)
+[Example 1 - 3D coordinates](examples_geojson/valid_but_problematic/more_than_2d_coordinates_3d.geojson)
 
 ### Crosses anti-meridian
-A **Polygon/LineString** that extends across the 180th meridian can lead to interoparability issues, and instead
+A **Polygon/LineString** that extends across the 180th meridian can lead to interoperability issues, and instead
 should be cut in two as a MultiPolygon or MultiLineString. The anti-meridian goes in vertical direction (north-south), 
-the longitude at this line can be given as either east or west. 
-Also see ["The 180th Meridian"](https://macwright.com/2016/09/26/the-180th-meridian.html) by Tom MacWright.
+the longitude at this line can be given as either east or west. A geometry crossing it would thus go over it from left to right
+or vice-versa. Also see ["The 180th Meridian"](https://macwright.com/2016/09/26/the-180th-meridian.html) by Tom MacWright.
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.9),
 [Example](examples_geojson/valid_but_problematic/crosses_antimeridian.geojson)
 
