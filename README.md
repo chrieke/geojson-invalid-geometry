@@ -53,7 +53,7 @@ only.
 The GeoJSON specification defines all GeoJSON as being in the [WGS84](https://de.wikipedia.org/wiki/World_Geodetic_System_1984)
 coordinate reference system (CRS) with latitude / longitude decimal coordinates. Latitudes are specified within the range of [-90, 90]
 and Longitudes within [-180, 180].
-[Example](examples_geojson/invalid/outside_lat_lon_boundary.geojson)
+[Example](examples_geojson/invalid/outside_lat_lon_boundaries.geojson)
 
 ### Coordinate reference system (CRS) defined
 The GeoJSON specification defines all GeoJSON as being in the [WGS84](https://de.wikipedia.org/wiki/World_Geodetic_System_1984)
