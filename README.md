@@ -18,8 +18,7 @@ must be the same, i.e. have identical values. This signifies the start and endpo
 [Example](examples_geojson/invalid/unclosed.geojson)
 
 ### Duplicate nodes
-From the closed **Polygon** requirement (see above), results that no two other positions of the exterior or interior
-ring can be the same, as then the start/endpoint of the ring could not be identified. 
+No two nodes of a **Polygon/LineString** can be the same, except the first and last node of a Polygon (see "unclosed" rule above).
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6), 
 [Example](examples_geojson/invalid/duplicate_nodes.geojson)
 
@@ -30,7 +29,7 @@ the first and last node must be the equivalent to close the Polygon (see above).
 [Example](examples_geojson/invalid/less_three_unique_nodes.geojson)
 
 ### Exterior not counter-clockwise winding order
-A Polygon's or MultiPolygons exterior ring must have counterclockwise winding order (often abbreviated ccw). This is often 
+A **Polygon's** exterior ring must have counterclockwise winding order (often abbreviated ccw). This is often 
 overlooked when manually creating Polygons or converting from other formats. As an older specification version did not 
 define the winding order, most tools will accept Polygons with invalid winding order, but not all.   
 In this context, many definitions use the term "right-hand rule": If you would walk along the ring in the order of the 
@@ -40,13 +39,13 @@ your left-hand side, it has a counter-clockwise winding order.
 [Example - Exterior](examples_geojson/invalid/exterior_not_ccw.geojson)
 
 ### Interior not clockwise winding order
-The inner rings (define hole cutouts) of a Polygon must be clockwise (often abbreviated cw). For more details also see 
+The inner rings (define hole cutouts) of a **Polygon** must be clockwise (often abbreviated cw). For more details also see 
 the "exterior not ccw" criterium above. 
 [Example - Interior](examples_geojson/invalid/interior_not_cw.geojson)
 
 
 ### Inner and exterior Polygon rings intersect or cross
-The inner ring of a Polygon must not intersect or cross the exterior ring. Also no two inner rings
+The inner ring of a **Polygon** must not intersect or cross the exterior ring. Also, no two inner rings
 may intersect or cross each other. The inner and exterior ring, as well as two inner rings may touch at a single point
 only.
 [Example](examples_geojson/invalid/inner_and_exterior_ring_intersect.geojson)
@@ -54,13 +53,13 @@ only.
 ### Coordinate reference system (CRS) defined
 The GeoJSON specification defines all GeoJSON as being in the [WGS84](https://de.wikipedia.org/wiki/World_Geodetic_System_1984)
 coordinate reference system (CRS) with latitude / longitude decimal coordinates. Thus, the CRS does not need to be
-specified in the GeoJSON. In older GeoJSON specifications you could define alternative crs, however this can lead to
-interoparability issues with some tools/APIs if they ignore the crs definition and assume WGS84.
+specified in the GeoJSON. In older GeoJSON specifications you could define alternative crs (as a "crs" key in the FeatureCollection).
+However this leads to interoperability issues with many tools/APIs, as they ignore the crs definition and assume latitude/longitude coordinates (WGS84).
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-4),
 [Example](examples_geojson/invalid/crs_defined.geojson)
 
 ### Zero-length LineString
-A Linestring with identical start and end node coordinates. A valid LineString contains two or more distinct positions.
+A **LineString** with identical start and end node coordinates. A valid LineString contains two or more distinct positions.
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.4),
 [Example](examples_geojson/invalid/zero_length_linestring.geojson)
 
@@ -77,16 +76,16 @@ parts that should be represented as a MultiPoint, MultiLineString or MultiPolygo
 ![](images/valid_problematic.png)
 
 ### Holes
-A Polygon is allowed to have hole cutouts, this is a feature, not an issue. However, some APIs don't accept
+A **Polygon** is allowed to have hole cutouts, this is a feature, not an issue. However, some APIs don't accept
 Polygon geometries with holes as input (e.g. some satellite data providers where the desired area is relevant for
 pricing). The holes can be removed by removing the
 Polygon's [inner ring](https://macwright.com/2015/03/23/geojson-second-bite.html#polygons) coordinates. 
 [Example](examples_geojson/valid_but_problematic/holes.geojson)
 
 ### Self-intersection
-Here one or multiple parts of the geometry overlap another part of itself. Often found in complex geometry shapes,
+Here one or multiple parts of a **Polygon** overlap another part of itself. Often found in complex geometry shapes,
 after geometry operations without careful cleanup (buffer, raster-to-vector etc.).
-A Polygon is allowed to have self-intersections, this is conform with the GeoJSON specification. However, it frequently
+A Polygon is allowed to have self-intersections, this conforms with the GeoJSON specification. However, it frequently
 causes issues in downstream applications thus is often rejected by APIs and tools.
 
 A common approach for removing the self-intersections is applying a zero-buffer operation (e.g. `.buffer(0)` in
@@ -121,7 +120,7 @@ The additional information should now be stored separately in the properties of 
 [Example 2 - 4D coordinates](examples_geojson/valid_but_problematic/more_than_2d_coordinates_4d.geojson)
 
 ### Crosses anti-meridian
-A Polygon or LineString that extends across the 180th meridian can lead to interoparability issues, and instead
+A **Polygon/LineString** that extends across the 180th meridian can lead to interoparability issues, and instead
 should be cut in two as a MultiPolygon or MultiLineString. The anti-meridian goes in vertical direction (north-south), 
 the longitude at this line can be given as either east or west. 
 Also see ["The 180th Meridian"](https://macwright.com/2016/09/26/the-180th-meridian.html) by Tom MacWright.
@@ -129,14 +128,14 @@ Also see ["The 180th Meridian"](https://macwright.com/2016/09/26/the-180th-merid
 [Example](examples_geojson/valid_but_problematic/crosses_antimeridian.geojson)
 
 ### Wrong bounding box coordinate order
-A `bbox` may be defined (but is not required) in the GeoJSON object to summarize the geometries on the Geometries,
-Features, or FeatureCollections level. If it is defined, the bbox coordinate order must conform
+A `bbox` may be defined (but is not required) in the GeoJSON object to summarize the extent on the level of Geometries,
+Features, or FeatureCollections. If it is defined, the bbox coordinate order must conform
 to `[west, south, east, north]`.
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3),
 [Example](examples_geojson/valid_but_problematic/wrong_bbox_coordinate_order.geojson)
 
 ### Multi-type Geometry with just one geometry object
-A MultiPoint, MultiLineString or MultiPolygon should represent multiple geometries of the same type
+A **MultiPoint/MultiLineString/MultiPolygon** should represent multiple geometries of the same type
 (e.g. multiple Polygons within a MultiPolygon). While it is not invalid according to the GeoJSON specification, if
 a Multi-type object only contains a single geometry object, some tools might complain.
 [Example](examples_geojson/valid_but_problematic/multitype_geometry_with_just_one_geometry.geojson)
