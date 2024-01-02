@@ -12,7 +12,7 @@ For a general introduction to GeoJSON see [here](https://macwright.com/2015/03/2
 ![](images/invalid_examples.png)
 
 ### Unclosed Polygon 
-The first and last node (also called nodes or vertices) of a Polygon's exterior ring (shell) or inner ring (hole) 
+The first and last node (corner point, also called vertex/vertices) of a Polygon's exterior ring (shell) or inner ring (hole) 
 must be the same, i.e. have identical values. This signifies the start and endpoint of a closed Polygon. 
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6),
 [Example](examples_geojson/invalid/polygon_unclosed_polygon.geojson)
@@ -90,16 +90,9 @@ the geometry into multiple parts, or adding/removing nodes.
 [Example 1 - Small](examples_geojson/valid_but_problematic/polygon_selfintersection_small.geojson) 
 [Example 2 - Large](examples_geojson/valid_but_problematic/polygon_selfintersection_large.geojson)
 
-### Wrong bounding box coordinate order
-A `bbox` may be defined (but is not required) in the GeoJSON object to summarize the geometries on the Geometries,
-Features, or FeatureCollections level. If it is defined, the bbox coordinate order must conform
-to `[west, south, east, north]`.
-[Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3),
-[Example](examples_geojson/valid_but_problematic/wrong_bounding_box_coordinate_order.geojson)
-
 ### Excessive coordinate precision
 Although not mandatory, the GeoJSON specification recommends a coordinate precision of 6 decimal places. Using more
-than 6 decimal places may lead to issues with some tools/APIs and unncessarily increase the file size (6 decimal places
+than 6 decimal places may lead to issues with some tools/APIs and unnecessarily increase the file size (6 decimal places
 corresponds to about 10cm of a GPS).
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-11.2),
 [Example](examples_geojson/valid_but_problematic/excessive_coordinate_precision.geojson)
@@ -114,6 +107,20 @@ tools or APIs this may lead to errors or the additional values being ignored. Th
 separately in the properties of the feature.
 [Example 1 - 3D coordinates](examples_geojson/valid_but_problematic/3d_coordinates.geojson),
 [Example 2 - 4D coordinates](examples_geojson/valid_but_problematic/4d_coordinates.geojson)
+
+### Geometry crosses the anti-meridian
+A Polygon or LineString that extends across the 180th meridian can lead to interoparability issues, and instead
+should be cut in two as a MultiPolygon or MultiLineString. The anti-meridian goes in vertical direction (north-south), the longitude at this line can be given as either east or west. 
+Also see ["The 180th Meridian"](https://macwright.com/2016/09/26/the-180th-meridian.html) by Tom MacWright.
+[Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.9),
+[Example](examples_geojson/valid_but_problematic/geometry_crosses_the_antimeridian.geojson)
+
+### Wrong bounding box coordinate order
+A `bbox` may be defined (but is not required) in the GeoJSON object to summarize the geometries on the Geometries,
+Features, or FeatureCollections level. If it is defined, the bbox coordinate order must conform
+to `[west, south, east, north]`.
+[Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3),
+[Example](examples_geojson/valid_but_problematic/wrong_bounding_box_coordinate_order.geojson)
 
 ### Multi-type Geometry with just one geometry object
 A MultiPoint, MultiLineString or MultiPolygon should represent multiple geometries of the same type
@@ -130,10 +137,3 @@ However, some tools might expect a Feature and FeatureCollection and the associa
 A GeoJSON Feature is allowed to be un-located, meaning it has `null` as a geometry member, see
 [spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.2). But some tools/APIs might expect a geometry and complain.
 [Example](examples_geojson/valid_but_problematic/feature_has_no_geometry.geojson)
-
-### Geometry crosses the anti-meridian
-A Polygon or LineString that extends across the 180th meridian can lead to interoparability issues, and instead
-should be cut in two as a MultiPolygon or MultiLineString. The anti-meridian goes in vertical direction (north-south), the longitude at this line can be given as either east or west. 
-Also see ["The 180th Meridian"](https://macwright.com/2016/09/26/the-180th-meridian.html) by Tom MacWright.
-[Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.9),
-[Example](examples_geojson/valid_but_problematic/geometry_crosses_the_antimeridian.geojson)
