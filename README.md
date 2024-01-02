@@ -11,44 +11,47 @@ For a general introduction to GeoJSON see [here](https://macwright.com/2015/03/2
 
 ![](images/invalid_examples.png)
 
-### Unclosed Polygon 
-The first and last node (corner point, also called vertex/vertices) of a Polygon's exterior ring (shell) or inner ring (hole) 
+### Unclosed 
+The first and last node (corner point, also called vertex/vertices) of a **Polygon's** exterior ring (shell) or inner ring (hole) 
 must be the same, i.e. have identical values. This signifies the start and endpoint of a closed Polygon. 
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6),
-[Example](examples_geojson/invalid/polygon_unclosed_polygon.geojson)
+[Example](examples_geojson/invalid/unclosed.geojson)
 
 ### Duplicate nodes
-From the closed Polygon requirement (see above), results that no two other positions of the exterior or interior
+From the closed **Polygon** requirement (see above), results that no two other positions of the exterior or interior
 ring can be the same, as then the start/endpoint of the ring could not be identified. 
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6), 
-[Example](examples_geojson/invalid/polygon_has_duplicate_nodes.geojson)
+[Example](examples_geojson/invalid/duplicate_nodes.geojson)
 
 ### Less than three unique nodes
-A [Polygon's](https://macwright.com/2015/03/23/geojson-second-bite.html#polygons) exterior ring and
-inner ring must have four or more nodes: Three or more unique coordinate positions plus the first and last node must 
-be the equivalent to close the Polygon (see above). Otherwise the Polygon would not cover an area.
+A **Polygon's** exterior ring and inner ring must have four or more nodes: Three or more unique coordinate positions plus
+the first and last node must be the equivalent to close the Polygon (see above). Otherwise the Polygon would not cover an area.
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6),
-[Example](examples_geojson/invalid/polygon_has_less_than_three_unique_nodes.geojson)
+[Example](examples_geojson/invalid/less_three_unique_nodes.geojson)
 
-### Wrong winding order
-A Polygon's or MultiPolygons exterior ring must have counterclockwise winding order, the inner ring (defines hole cutouts) 
-must be clockwise. This is often overlooked when manually creating Polygons or converting from other formats. 
-As an older specification version did not define the winding order, most tools will accept Polygons with invalid winding
-order, but not all.   
+### Exterior not counter-clockwise winding order
+A Polygon's or MultiPolygons exterior ring must have counterclockwise winding order (often abbreviated ccw). This is often 
+overlooked when manually creating Polygons or converting from other formats. As an older specification version did not 
+define the winding order, most tools will accept Polygons with invalid winding order, but not all.   
 In this context, many definitions use the term "right-hand rule": If you would walk along the ring in the order of the 
 coordinates, if the area enclosed by the ring is on your right-hand side, it has a clockwise winding order; if it is on 
 your left-hand side, it has a counter-clockwise winding order.
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6),
-[Example 1 - Exterior](examples_geojson/invalid/polygon_exterior_ring_not_counterclockwise_winding_order.geojson),
-[Example 2 - Interior](examples_geojson/invalid/polygon_interior_ring_not_clockwise_winding_order.geojson)
+[Example - Exterior](examples_geojson/invalid/exterior_not_ccw.geojson)
+
+### Interior not clockwise winding order
+The inner rings (define hole cutouts) of a Polygon must be clockwise (often abbreviated cw). For more details also see 
+the "exterior not ccw" criterium above. 
+[Example - Interior](examples_geojson/invalid/interior_not_cw.geojson)
+
 
 ### Inner and exterior Polygon rings intersect or cross
 The inner ring of a Polygon must not intersect or cross the exterior ring. Also no two inner rings
 may intersect or cross each other. The inner and exterior ring, as well as two inner rings may touch at a single point
 only.
-[Example](examples_geojson/invalid/polygon_inner_and_exterior_ring_cross.geojson)
+[Example](examples_geojson/invalid/inner_and_exterior_ring_intersect.geojson)
 
-### Defined coordinate reference system (CRS)
+### Coordinate reference system (CRS) defined
 The GeoJSON specification defines all GeoJSON as being in the [WGS84](https://de.wikipedia.org/wiki/World_Geodetic_System_1984)
 coordinate reference system (CRS) with latitude / longitude decimal coordinates. Thus, the CRS does not need to be
 specified in the GeoJSON. In older GeoJSON specifications you could define alternative crs, however this can lead to
@@ -59,11 +62,11 @@ interoparability issues with some tools/APIs if they ignore the crs definition a
 ### Zero-length LineString
 A Linestring with identical start and end node coordinates. A valid LineString contains two or more distinct positions.
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.4),
-[Example](examples_geojson/invalid/linestring_zero_length.geojson)
+[Example](examples_geojson/invalid/zero_length_linestring.geojson)
 
 ### Incorrect geometry data type
 For example, a geometry that can be identified as a Polygon by its shape, has the geometry `type` defined as another
-type, e.g. LineString. Also when a single geometry object (e.g., Point, LineString or Polygon) has multiple, disconnected 
+type, e.g. LineString. Similarly when a single geometry object (e.g., Point, LineString or Polygon) has multiple, disconnected 
 parts that should be represented as a MultiPoint, MultiLineString or MultiPolygon.
 [Example](examples_geojson/invalid/incorrect_geometry_data_type.geojson)
 
@@ -73,14 +76,14 @@ parts that should be represented as a MultiPoint, MultiLineString or MultiPolygo
 
 ![](images/valid_problematic.png)
 
-### Polygon has holes
+### Holes
 A Polygon is allowed to have hole cutouts, this is a feature, not an issue. However, some APIs don't accept
 Polygon geometries with holes as input (e.g. some satellite data providers where the desired area is relevant for
 pricing). The holes can be removed by removing the
 Polygon's [inner ring](https://macwright.com/2015/03/23/geojson-second-bite.html#polygons) coordinates. 
-[Example](examples_geojson/valid_but_problematic/polygon_has_holes.geojson)
+[Example](examples_geojson/valid_but_problematic/holes.geojson)
 
-### Polygon self-intersection
+### Self-intersection
 Here one or multiple parts of the geometry overlap another part of itself. Often found in complex geometry shapes,
 after geometry operations without careful cleanup (buffer, raster-to-vector etc.).
 A Polygon is allowed to have self-intersections, this is conform with the GeoJSON specification. However, it frequently
@@ -91,8 +94,8 @@ shapely). This dissolves the overlapping areas and usually is an okay solution f
 However, especially for larger self-intersections (see example 2) this might lead to unintended changes of the geometry, 
 as significant parts of the geometry could be removed by the operation. Here only a manual operation can fix the issue, 
 by splitting of the geometry into multiple parts, or adding/removing nodes.
-[Example 1 - Small](examples_geojson/valid_but_problematic/polygon_selfintersection_small.geojson) 
-[Example 2 - Large](examples_geojson/valid_but_problematic/polygon_selfintersection_large.geojson)
+[Example 1 - Small](examples_geojson/valid_but_problematic/self_intersection_small.geojson) 
+[Example 2 - Large](examples_geojson/valid_but_problematic/self_intersection_large.geojson)
 
 ### Excessive coordinate precision
 Although not mandatory, the GeoJSON specification recommends a coordinate precision of 6 decimal places. Using more
@@ -114,8 +117,8 @@ In early versions of the GeoJSON specification, it was normal to store more than
 information like time etc. Technically still allowed but [discouraged](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.1) 
 by the current specification, if used in some tools or APIs this may lead to errors or the additional values being ignored. 
 The additional information should now be stored separately in the properties of the feature.
-[Example 1 - 3D coordinates](examples_geojson/valid_but_problematic/3d_coordinates.geojson),
-[Example 2 - 4D coordinates](examples_geojson/valid_but_problematic/4d_coordinates.geojson)
+[Example 1 - 3D coordinates](examples_geojson/valid_but_problematic/more_than_2d_coordinates_3d.geojson),
+[Example 2 - 4D coordinates](examples_geojson/valid_but_problematic/more_than_2d_coordinates_4d.geojson)
 
 ### Crosses anti-meridian
 A Polygon or LineString that extends across the 180th meridian can lead to interoparability issues, and instead
@@ -123,14 +126,14 @@ should be cut in two as a MultiPolygon or MultiLineString. The anti-meridian goe
 the longitude at this line can be given as either east or west. 
 Also see ["The 180th Meridian"](https://macwright.com/2016/09/26/the-180th-meridian.html) by Tom MacWright.
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.9),
-[Example](examples_geojson/valid_but_problematic/geometry_crosses_the_antimeridian.geojson)
+[Example](examples_geojson/valid_but_problematic/crosses_antimeridian.geojson)
 
 ### Wrong bounding box coordinate order
 A `bbox` may be defined (but is not required) in the GeoJSON object to summarize the geometries on the Geometries,
 Features, or FeatureCollections level. If it is defined, the bbox coordinate order must conform
 to `[west, south, east, north]`.
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3),
-[Example](examples_geojson/valid_but_problematic/wrong_bounding_box_coordinate_order.geojson)
+[Example](examples_geojson/valid_but_problematic/wrong_bbox_coordinate_order.geojson)
 
 ### Multi-type Geometry with just one geometry object
 A MultiPoint, MultiLineString or MultiPolygon should represent multiple geometries of the same type
@@ -138,12 +141,12 @@ A MultiPoint, MultiLineString or MultiPolygon should represent multiple geometri
 a Multi-type object only contains a single geometry object, some tools might complain.
 [Example](examples_geojson/valid_but_problematic/multitype_geometry_with_just_one_geometry.geojson)
 
-### Geometry or Feature not wrapped in a Feature or FeatureCollection
-The GeoJSON specification allows not wrapping geometry or feature objects in a FeatureCollection,
-see [spec](https://www.rfc-editor.org/rfc/rfc7946#section-2). Any GeoJSON object on its own is still a valid GeoJSON. 
-However, some tools might expect a Feature and FeatureCollection and the associated properties.
-
 ### Feature has no geometry
 A GeoJSON Feature is allowed to be un-located, meaning it has `null` as a geometry member, see
 [spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.2). But some tools/APIs might expect a geometry and complain.
 [Example](examples_geojson/valid_but_problematic/feature_has_no_geometry.geojson)
+
+### Geometry or Feature not wrapped in a Feature or FeatureCollection
+The GeoJSON specification allows not wrapping geometry or feature objects in a FeatureCollection,
+see [spec](https://www.rfc-editor.org/rfc/rfc7946#section-2). Any GeoJSON object on its own is still a valid GeoJSON. 
+However, some tools might expect a Feature and FeatureCollection and the associated properties.
