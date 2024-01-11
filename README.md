@@ -62,7 +62,7 @@ specified in the GeoJSON. In older GeoJSON specifications you could define alter
 However this leads to interoperability issues with many tools/APIs, as they ignore the crs definition and assume 
 latitude/longitude coordinates (WGS84).
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-4),
-[Example](examples/invalid_geometries/invalid_crs_defined.geojson)
+[Example](examples/invalid_schema/invalid_crs_defined.geojson)
 
 ### Zero-length LineString
 A **LineString** with identical start and end node coordinates. A valid LineString contains two or more distinct positions.

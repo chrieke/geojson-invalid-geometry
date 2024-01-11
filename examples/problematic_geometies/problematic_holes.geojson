@@ -1,6 +1,5 @@
 {
   "type": "FeatureCollection",
-  "name": "polygon_has_holes",
   "features": [
     {
       "type": "Feature",

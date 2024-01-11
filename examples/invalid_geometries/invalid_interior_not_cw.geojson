@@ -1,6 +1,5 @@
 {
   "type": "FeatureCollection",
-  "name": "polygon_inner_ring_not_clockwise_winding_order",
   "features": [
     {
       "type": "Feature",

@@ -1,6 +1,5 @@
 {
   "type": "FeatureCollection",
-  "name": "polygon_has_less_than_three_unique_nodes",
   "features": [
     {
       "type": "Feature",

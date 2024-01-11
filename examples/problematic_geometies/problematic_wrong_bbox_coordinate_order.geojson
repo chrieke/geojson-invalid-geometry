@@ -1,6 +1,5 @@
 {
   "type": "FeatureCollection",
-  "name": "wrong_bounding_box_coordinate_order",
   "bbox": [
     13.3820342897645,
     52.5081231637205,

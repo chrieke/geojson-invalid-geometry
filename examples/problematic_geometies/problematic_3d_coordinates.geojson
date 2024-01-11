@@ -1,6 +1,5 @@
 {
   "type": "FeatureCollection",
-  "name": "3d_coordinates",
   "features": [
     {
       "type": "Feature",

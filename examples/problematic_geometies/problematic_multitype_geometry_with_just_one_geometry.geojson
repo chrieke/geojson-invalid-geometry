@@ -1,6 +1,5 @@
 {
   "type": "FeatureCollection",
-  "name": "multitype_geometry_with_just_one_geometry",
   "features": [
     {
       "type": "Feature",

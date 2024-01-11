@@ -1,6 +1,5 @@
 {
   "type": "FeatureCollection",
-  "name": "polygon_inner_and_exterior_ring_cross",
   "features": [
     {
       "type": "Feature",

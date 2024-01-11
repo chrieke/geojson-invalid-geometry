@@ -1,6 +1,5 @@
 {
   "type": "FeatureCollection",
-  "name": "polygon_unclosed_polygon",
   "features": [
     {
       "type": "Feature",

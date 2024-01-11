@@ -1,42 +1,10 @@
 {
   "type": "FeatureCollection",
-  "name": "feature_has_no_geometry",
   "features": [
     {
       "type": "Feature",
       "properties": {},
       "geometry": null
-    },
-    {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              13.38966,
-              52.50868
-            ],
-            [
-              13.389662,
-              52.508123
-            ],
-            [
-              13.390692,
-              52.508123
-            ],
-            [
-              13.390692,
-              52.508683
-            ],
-            [
-              13.389662,
-              52.508683
-            ]
-          ]
-        ]
-      }
     }
   ]
 }

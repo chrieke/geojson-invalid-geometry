@@ -1,6 +1,5 @@
 {
   "type": "FeatureCollection",
-  "name": "crs_defined",
   "crs": {
     "type": "name",
     "properties": {

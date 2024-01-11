@@ -1,6 +1,5 @@
 {
   "type": "FeatureCollection",
-  "name": "linestring_zero_length",
   "features": [
     {
       "type": "Feature",

@@ -1,6 +1,5 @@
 {
   "type": "FeatureCollection",
-  "name": "excessive_coordinate_precision",
   "features": [
     {
       "type": "Feature",

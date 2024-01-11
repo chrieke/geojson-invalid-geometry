@@ -1,6 +1,5 @@
 {
   "type": "FeatureCollection",
-  "name": "incorrect_geometry_data_types",
   "features": [
     {
       "type": "Feature",
