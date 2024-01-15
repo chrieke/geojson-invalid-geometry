@@ -4,8 +4,7 @@
 
 Ever encountered an *invalid geometry* error when dealing with GeoJSON? Even if a GeoJSON conforms to the
 [GeoJSON specification](https://geojson.org/), some tools or APIs might have issues with it.
-This repo shows the common issues when handling GeoJSON geometries and how to fix them.
-For a general introduction to GeoJSON see [here](https://macwright.com/2015/03/23/geojson-second-bite.html).
+This repo shows the common issues when handling GeoJSON geometries and how to fix them. To validate and fix GeoJSON automatically you can use the [geojson-validator](https://github.com/chrieke/geojson-validator). For a general introduction to GeoJSON see [here](https://macwright.com/2015/03/23/geojson-second-bite.html).
 
 ## Invalid by GeoJSON specification
 
