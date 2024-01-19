@@ -1,0 +1,5 @@
+{
+    "type": "Point",
+    "coordinates": [2, 2],
+    "bbox": "something_but_not_a_list"
+}
