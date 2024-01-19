@@ -4,7 +4,9 @@
 
 Ever encountered an *invalid geometry* error when dealing with GeoJSON? Even if a GeoJSON conforms to the
 [GeoJSON specification](https://geojson.org/), some tools or APIs might have issues with it.
-This repo shows the common issues when handling GeoJSON geometries and how to fix them. To validate and fix GeoJSON automatically you can use the [geojson-validator](https://github.com/chrieke/geojson-validator). For a general introduction to GeoJSON see [here](https://macwright.com/2015/03/23/geojson-second-bite.html).
+This repo shows the common issues when handling GeoJSON geometries and how to fix them. To validate and fix GeoJSON 
+automatically you can use the [geojson-validator](https://github.com/chrieke/geojson-validator). For a general 
+introduction to GeoJSON see [here](https://macwright.com/2015/03/23/geojson-second-bite.html).
 
 ## Invalid by GeoJSON specification
 
@@ -38,9 +40,9 @@ the "exterior not ccw" criterium above.
 [Example - Interior](examples/invalid_geometries/invalid_interior_not_cw.geojson)
 
 ### Inner and exterior Polygon rings intersect or cross
-The exterior ring of a **Polygon** bounds the surface, the inner ring must not intersect or cross the exterior ring. 
-Also, no two inner rings may intersect or cross each other. The inner and exterior ring, as well as two inner rings may 
-touch only at a single point.
+The inner ring of a **Polygon** must not intersect or cross the exterior ring. Also, no two inner rings may intersect 
+or cross each other. The inner and exterior ring, as well as two inner rings may touch only at a single point. 
+This is because the exterior and inner ring of a Polygon bound surfaces.
 [Example](examples/invalid_geometries/invalid_inner_and_exterior_ring_intersect.geojson)
 
 ### Incorrect geometry data type
