@@ -16,11 +16,6 @@ must be the same, i.e. have identical values. This signifies the start and endpo
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6),
 [Example](examples/invalid_geometries/invalid_unclosed.geojson)
 
-### Duplicate nodes
-No two nodes of a **Polygon/LineString** can be the same, except the first and last node of a Polygon (see "unclosed" rule above).
-[Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6), 
-[Example](examples/invalid_geometries/invalid_duplicate_nodes.geojson)
-
 ### Less than three unique nodes
 A **Polygon's** exterior ring and inner ring must have four or more nodes: Three or more unique coordinate positions plus
 the first and last node must be the equivalent to close the Polygon (see above). Otherwise the Polygon would not cover an area.
@@ -100,6 +95,11 @@ as significant parts of the geometry could be removed by the operation. Here onl
 by splitting of the geometry into multiple parts, or adding/removing nodes.
 [Example 1 - Small](examples/problematic_geometries/problematic_self_intersection_small.geojson) 
 [Example 2 - Large](examples/problematic_geometries/problematic_self_intersection_large.geojson)
+
+### Duplicate nodes
+Except the first and last node of a Polygon (see "unclosed" rule above), nodes of a **Polygon/LineString** are ideally
+unique.
+[Example](examples/problematic_geometries/problematic_duplicate_nodes.geojson)
 
 ### Excessive coordinate precision
 Although not mandatory, the GeoJSON specification recommends a coordinate precision of 6 decimal places. Using more
