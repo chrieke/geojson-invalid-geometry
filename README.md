@@ -38,15 +38,10 @@ the "exterior not ccw" criterium above.
 [Example - Interior](examples/invalid_geometries/invalid_interior_not_cw.geojson)
 
 ### Inner and exterior Polygon rings intersect or cross
-The inner ring of a **Polygon** must not intersect or cross the exterior ring. Also, no two inner rings
-may intersect or cross each other. The inner and exterior ring, as well as two inner rings may touch at a single point
-only.
+The exterior ring of a **Polygon** bounds the surface, the inner ring must not intersect or cross the exterior ring. 
+Also, no two inner rings may intersect or cross each other. The inner and exterior ring, as well as two inner rings may 
+touch only at a single point.
 [Example](examples/invalid_geometries/invalid_inner_and_exterior_ring_intersect.geojson)
-
-### Zero-length LineString
-A **LineString** with identical start and end node coordinates. A valid LineString contains two or more distinct positions.
-[Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.4),
-[Example](examples/invalid_geometries/invalid_zero_length_linestring.geojson)
 
 ### Incorrect geometry data type
 For example, a geometry that can be identified as a Polygon by its shape, has the geometry `type` defined as another
@@ -85,6 +80,11 @@ by splitting of the geometry into multiple parts, or adding/removing nodes.
 Except the first and last node of a Polygon (see "unclosed" rule above), nodes of a **Polygon/LineString** are ideally
 unique.
 [Example](examples/problematic_geometries/problematic_duplicate_nodes.geojson)
+
+### Zero-length LineString
+A **LineString** with identical start and end node coordinates has zero length, which can lead to issues.
+[Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.4),
+[Example](examples/problematic_geometries/problematic_zero_length_linestring.geojson)
 
 ### Excessive coordinate precision
 Although not mandatory, the GeoJSON specification recommends a coordinate precision of 6 decimal places. Using more
