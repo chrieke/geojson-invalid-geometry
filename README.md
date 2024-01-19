@@ -43,12 +43,6 @@ may intersect or cross each other. The inner and exterior ring, as well as two i
 only.
 [Example](examples/invalid_geometries/invalid_inner_and_exterior_ring_intersect.geojson)
 
-### Outside latitude/longitude boundary
-The GeoJSON specification defines all GeoJSON as being in the [WGS84](https://de.wikipedia.org/wiki/World_Geodetic_System_1984)
-coordinate reference system (CRS) with latitude / longitude decimal coordinates. Latitudes are specified within the range of [-90, 90]
-and Longitudes within [-180, 180].
-[Example](examples/invalid_geometries/invalid_outside_lat_lon_boundaries.geojson)
-
 ### Coordinate reference system (CRS) defined
 The GeoJSON specification defines all GeoJSON as being in the [WGS84](https://de.wikipedia.org/wiki/World_Geodetic_System_1984)
 coordinate reference system (CRS) with latitude / longitude decimal coordinates. Thus, the CRS does not need to be
@@ -122,6 +116,13 @@ information like time etc. Technically still allowed but [discouraged](https://w
 by the current specification, if used in some tools or APIs this may lead to errors or the additional values being ignored. 
 The additional information should now be stored separately in the properties of the feature.
 [Example 1 - 3D coordinates](examples/problematic_geometries/problematic_3d_coordinates.geojson)
+
+### Outside latitude/longitude boundary
+The most recent GeoJSON specification defines GeoJSON as being in the [WGS84](https://de.wikipedia.org/wiki/World_Geodetic_System_1984)
+coordinate reference system (CRS) with latitude / longitude decimal coordinates. Latitudes are specified within the range 
+of [-90, 90] and longitudes within [-180, 180]. Older GeoJSON specification allowed setting CRS, and using coordinates
+in other coordinate systems is not explicitley forbidden, but leads to interopability issues with many tools.
+[Example](examples/problematic_geometries/problematic_outside_lat_lon_boundaries.geojson)
 
 ### Crosses anti-meridian
 A **Polygon/LineString** that extends across the 180th meridian can lead to interoperability issues, and instead
