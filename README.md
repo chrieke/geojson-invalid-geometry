@@ -57,6 +57,15 @@ parts that should be represented as a MultiPoint, MultiLineString or MultiPolygo
 
 ![](repo_images/valid_problematic.png)
 
+### Coordinate reference system (CRS) defined
+The GeoJSON specification defines GeoJSON as being in the [WGS84](https://de.wikipedia.org/wiki/World_Geodetic_System_1984)
+coordinate reference system (CRS) with latitude / longitude decimal coordinates. Thus, the CRS does not need to be
+specified in the GeoJSON. In older GeoJSON specifications you could define alternative crs (as a "crs" key in the FeatureCollection).
+However this leads to interoperability issues with many tools/APIs, as they can ignore the crs definition and assume 
+latitude/longitude coordinates (WGS84).
+[Spec](https://www.rfc-editor.org/rfc/rfc7946#section-4),
+[Example](examples/problematic_structure/invalid_crs_defined.geojson)
+
 ### Holes
 A **Polygon** is allowed to have hole cutouts, this is a feature, not an issue. However, some APIs don't accept
 Polygon geometries with holes as input (e.g. some satellite data providers where the desired area is relevant for
@@ -147,14 +156,3 @@ A GeoJSON Feature is allowed to be un-located, meaning it has `null` as a geomet
 The GeoJSON specification allows not wrapping geometry or feature objects in a FeatureCollection,
 see [spec](https://www.rfc-editor.org/rfc/rfc7946#section-2). Any GeoJSON object on its own is still a valid GeoJSON. 
 However, some tools might expect a Feature and FeatureCollection and the associated properties.
-
-
-## Other
-### Coordinate reference system (CRS) defined
-The GeoJSON specification defines GeoJSON as being in the [WGS84](https://de.wikipedia.org/wiki/World_Geodetic_System_1984)
-coordinate reference system (CRS) with latitude / longitude decimal coordinates. Thus, the CRS does not need to be
-specified in the GeoJSON. In older GeoJSON specifications you could define alternative crs (as a "crs" key in the FeatureCollection).
-However this leads to interoperability issues with many tools/APIs, as they can ignore the crs definition and assume 
-latitude/longitude coordinates (WGS84).
-[Spec](https://www.rfc-editor.org/rfc/rfc7946#section-4),
-[Example](examples/problematic_structure/invalid_crs_defined.geojson)
