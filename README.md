@@ -156,3 +156,7 @@ A GeoJSON Feature is allowed to be un-located, meaning it has `null` as a geomet
 The GeoJSON specification allows not wrapping geometry or feature objects in a FeatureCollection,
 see [spec](https://www.rfc-editor.org/rfc/rfc7946#section-2). Any GeoJSON object on its own is still a valid GeoJSON. 
 However, some tools might expect a Feature and FeatureCollection and the associated properties.
+
+### Nested GeometryCollections
+While a GeometryCollection within a GeometryCollection is allowed, the GeoJSON specification recommends avoiding this to maximize interoparability.
+[Example](examples/problematic_structure/problematic_nested_geometrycollection.geojson)
