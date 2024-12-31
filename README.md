@@ -64,7 +64,7 @@ specified in the GeoJSON. In older GeoJSON specifications you could define alter
 However this leads to interoperability issues with many tools/APIs, as they can ignore the crs definition and assume 
 latitude/longitude coordinates (WGS84).
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-4),
-[Example](examples/problematic_structure/invalid_crs_defined.geojson)
+[Example](examples/problematic_structure/problematic_crs_defined.geojson)
 
 ### Holes
 A **Polygon** is allowed to have hole cutouts, this is a feature, not an issue. However, some APIs don't accept
@@ -159,4 +159,9 @@ However, some tools might expect a Feature and FeatureCollection and the associa
 
 ### Nested GeometryCollections
 While a GeometryCollection within a GeometryCollection is allowed, the GeoJSON specification recommends avoiding this to maximize interoparability.
+[Example](examples/problematic_structure/problematic_nested_geometrycollection.geojson)
+
+### GeometryCollection with a single part or only parts of a single type
+GeometryCollections composed of a single part or a number of parts of a single type should be avoided
+when that single part or a single object of multipart type (MultiPoint, MultiLineString, or MultiPolygon) could be used instead.
 [Example](examples/problematic_structure/problematic_nested_geometrycollection.geojson)
