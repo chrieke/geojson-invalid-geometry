@@ -36,7 +36,7 @@ your left-hand side, it has a counter-clockwise winding order.
 
 ### Interior not clockwise winding order
 The inner rings (define hole cutouts) of a **Polygon** must be clockwise (often abbreviated cw). For more details also see 
-the "exterior not ccw" criterium above. 
+the "exterior not ccw" criterion above. 
 [Example - Interior](examples/invalid_geometries/invalid_interior_not_cw.geojson)
 
 ### Inner and exterior Polygon rings intersect or cross
@@ -100,7 +100,7 @@ A **LineString** with identical start and end node coordinates has zero length, 
 ### Excessive coordinate precision
 Although not mandatory, the GeoJSON specification recommends a coordinate precision of 6 decimal places. Using more
 than 6 decimal places may lead to issues with some tools/APIs and unnecessarily increase the file size (6 decimal places
-corresponds to about 10cm of a GPS).
+correspond to a precision of about 10 cm on the ground).
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-11.2),
 [Example](examples/problematic_geometries/problematic_excessive_coordinate_precision.geojson)
 
@@ -123,7 +123,7 @@ The additional information should now be stored separately in the properties of 
 The most recent GeoJSON specification defines GeoJSON as being in the [WGS84](https://de.wikipedia.org/wiki/World_Geodetic_System_1984)
 coordinate reference system (CRS) with latitude / longitude decimal coordinates. Latitudes are specified within the range 
 of [-90, 90] and longitudes within [-180, 180]. Older GeoJSON specification allowed setting CRS, and using coordinates
-in other coordinate systems is not explicitley forbidden, but leads to interopability issues with many tools.
+in other coordinate systems is not explicitly forbidden, but leads to interoperability issues with many tools.
 [Example](examples/problematic_geometries/problematic_outside_lat_lon_boundaries.geojson)
 
 ### Crosses anti-meridian
@@ -158,10 +158,10 @@ see [spec](https://www.rfc-editor.org/rfc/rfc7946#section-2). Any GeoJSON object
 However, some tools might expect a Feature and FeatureCollection and the associated properties.
 
 ### Nested GeometryCollections
-While a GeometryCollection within a GeometryCollection is allowed, the GeoJSON specification recommends avoiding this to maximize interoparability.
+While a GeometryCollection within a GeometryCollection is allowed, the GeoJSON specification recommends avoiding this to maximize interoperability.
 [Example](examples/problematic_structure/problematic_nested_geometrycollection.geojson)
 
 ### GeometryCollection with a single part or only parts of a single type
 GeometryCollections composed of a single part or a number of parts of a single type should be avoided
 when that single part or a single object of multipart type (MultiPoint, MultiLineString, or MultiPolygon) could be used instead.
-[Example](examples/problematic_structure/problematic_nested_geometrycollection.geojson)
+[Example](examples/problematic_structure/problematic_geometrycollection_single.geojson)
