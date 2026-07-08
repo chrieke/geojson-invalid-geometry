@@ -39,12 +39,6 @@ The inner rings (define hole cutouts) of a **Polygon** must be clockwise (often 
 the "exterior not ccw" criterion above. 
 [Example - Interior](examples/invalid_geometries/invalid_interior_not_cw.geojson)
 
-### Inner and exterior Polygon rings intersect or cross
-The inner ring of a **Polygon** must not intersect or cross the exterior ring. Also, no two inner rings may intersect 
-or cross each other. The inner and exterior ring, as well as two inner rings may touch only at a single point. 
-This is because the exterior and inner ring of a Polygon bound surfaces.
-[Example](examples/invalid_geometries/invalid_inner_and_exterior_ring_intersect.geojson)
-
 ### Incorrect geometry data type
 For example, a geometry that can be identified as a Polygon by its shape, has the geometry `type` defined as another
 type, e.g. LineString. Similarly when a single geometry object (e.g., Point, LineString or Polygon) has multiple, disconnected 
@@ -76,7 +70,7 @@ Polygon's [inner ring](https://macwright.com/2015/03/23/geojson-second-bite.html
 ### Self-intersection
 Here one or multiple parts of a **Polygon** overlap another part of itself. Often found in complex geometry shapes,
 after geometry operations without careful cleanup (buffer, raster-to-vector etc.).
-A Polygon is allowed to have self-intersections, this conforms with the GeoJSON specification. However, it frequently
+The GeoJSON spec (RFC 7946) does not prohibit self-intersections. However, it frequently
 causes issues in downstream applications thus is often rejected by APIs and tools.
 
 A common approach for removing the self-intersections is applying a zero-buffer operation (e.g. `.buffer(0)` in
@@ -86,6 +80,13 @@ as significant parts of the geometry could be removed by the operation. Here onl
 by splitting of the geometry into multiple parts, or adding/removing nodes.
 [Example 1 - Small](examples/problematic_geometries/problematic_self_intersection_small.geojson) 
 [Example 2 - Large](examples/problematic_geometries/problematic_self_intersection_large.geojson)
+
+### Inner and exterior Polygon rings intersect or cross
+The inner ring of a **Polygon** should not intersect or cross the exterior ring, no two inner rings should cross each 
+other, and rings may touch only at a single point. RFC 7946 does not forbid this explicitly (it only requires interior 
+rings to "bound holes within the surface"), but in practice it is prohibited by the OGC Simple Features standard that 
+most tools enforce (e.g. Shapely/GEOS `is_valid`), so such geometries are widely rejected.
+[Example](examples/problematic_geometries/problematic_inner_and_exterior_ring_intersect.geojson)
 
 ### Duplicate nodes
 Except the first and last node of a Polygon (see "unclosed" rule above), nodes of a **Polygon/LineString** are ideally
