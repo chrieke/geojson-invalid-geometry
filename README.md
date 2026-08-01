@@ -18,7 +18,7 @@ must be the same, i.e. have identical values. This signifies the start and endpo
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6),
 [Example](examples/invalid_geometries/invalid_unclosed.geojson)
 
-### Less than three unique nodes
+### Fewer than three unique nodes
 A **Polygon's** exterior ring and inner ring must have four or more nodes: Three or more unique coordinate positions plus
 the first and last node must be the equivalent to close the Polygon (see above). Otherwise the Polygon would not cover an area.
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6),
@@ -52,9 +52,10 @@ parts that should be represented as a MultiPoint, MultiLineString or MultiPolygo
 ![](repo_images/valid_problematic.png)
 
 ### Coordinate reference system (CRS) defined
-The GeoJSON specification defines GeoJSON as being in the [WGS84](https://de.wikipedia.org/wiki/World_Geodetic_System_1984)
+The GeoJSON specification defines GeoJSON as being in the [WGS84](https://en.wikipedia.org/wiki/World_Geodetic_System)
 coordinate reference system (CRS) with latitude / longitude decimal coordinates. Thus, the CRS does not need to be
-specified in the GeoJSON. In older GeoJSON specifications you could define alternative crs (as a "crs" key in the FeatureCollection).
+specified in the GeoJSON. In older GeoJSON specifications you could define alternative crs (as a "crs" key on any GeoJSON object,
+e.g. the FeatureCollection).
 However this leads to interoperability issues with many tools/APIs, as they can ignore the crs definition and assume 
 latitude/longitude coordinates (WGS84).
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-4),
@@ -77,7 +78,7 @@ A common approach for removing the self-intersections is applying a zero-buffer 
 shapely). This dissolves the overlapping areas and usually is an okay solution for small, undesired self-intersections.
 However, especially for larger self-intersections (see example 2) this might lead to unintended changes of the geometry, 
 as significant parts of the geometry could be removed by the operation. Here only a manual operation can fix the issue, 
-by splitting of the geometry into multiple parts, or adding/removing nodes.
+by splitting the geometry into multiple parts, or adding/removing nodes.
 [Example 1 - Small](examples/problematic_geometries/problematic_self_intersection_small.geojson) 
 [Example 2 - Large](examples/problematic_geometries/problematic_self_intersection_large.geojson)
 
@@ -94,7 +95,7 @@ unique.
 [Example](examples/problematic_geometries/problematic_duplicate_nodes.geojson)
 
 ### Zero-length LineString
-A **LineString** with identical start and end node coordinates has zero length, which can lead to issues.
+A **LineString** in which all positions are identical (e.g. a two-point LineString repeating the same coordinate) has zero length, which can lead to issues.
 [Spec](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.4),
 [Example](examples/problematic_geometries/problematic_zero_length_linestring.geojson)
 
@@ -121,7 +122,7 @@ The additional information should now be stored separately in the properties of 
 [Example 1 - 3D coordinates](examples/problematic_geometries/problematic_3d_coordinates.geojson)
 
 ### Outside latitude/longitude boundary
-The most recent GeoJSON specification defines GeoJSON as being in the [WGS84](https://de.wikipedia.org/wiki/World_Geodetic_System_1984)
+The most recent GeoJSON specification defines GeoJSON as being in the [WGS84](https://en.wikipedia.org/wiki/World_Geodetic_System)
 coordinate reference system (CRS) with latitude / longitude decimal coordinates. Latitudes are specified within the range 
 of [-90, 90] and longitudes within [-180, 180]. Older GeoJSON specification allowed setting CRS, and using coordinates
 in other coordinate systems is not explicitly forbidden, but leads to interoperability issues with many tools.
@@ -157,6 +158,7 @@ A GeoJSON Feature is allowed to be un-located, meaning it has `null` as a geomet
 The GeoJSON specification allows not wrapping geometry or feature objects in a FeatureCollection,
 see [spec](https://www.rfc-editor.org/rfc/rfc7946#section-2). Any GeoJSON object on its own is still a valid GeoJSON. 
 However, some tools might expect a Feature and FeatureCollection and the associated properties.
+[Example](examples/problematic_structure/problematic_geometry_not_wrapped.geojson)
 
 ### Nested GeometryCollections
 While a GeometryCollection within a GeometryCollection is allowed, the GeoJSON specification recommends avoiding this to maximize interoperability.
