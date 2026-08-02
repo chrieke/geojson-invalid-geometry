@@ -8,7 +8,7 @@ This repo shows the common issues when handling GeoJSON geometries and how to fi
 automatically you can use the [geojson-validator](https://github.com/chrieke/geojson-validator). For a general 
 introduction to GeoJSON see [here](https://macwright.com/2015/03/23/geojson-second-bite.html).
 
-The `examples/` folder contains geojsons for each invalid/problematic example below, additional geojson structure examples and valid examples for reference.
+The `examples/` folder contains geojsons for each invalid/problematic issue below, additional geojson structure examples and valid examples for reference.
 
 ## Invalid by GeoJSON specification
 
