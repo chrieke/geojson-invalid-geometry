@@ -8,6 +8,9 @@ This repo shows the common issues when handling GeoJSON geometries and how to fi
 automatically you can use the [geojson-validator](https://github.com/chrieke/geojson-validator). For a general 
 introduction to GeoJSON see [here](https://macwright.com/2015/03/23/geojson-second-bite.html).
 
+The `examples/` folder contains one file per issue below, plus structural examples (e.g. a missing `properties` member)
+and valid files for reference.
+
 ## Invalid by GeoJSON specification
 
 ![](repo_images/invalid_examples.png)
@@ -119,7 +122,8 @@ In early versions of the GeoJSON specification, it was normal to store more than
 information like time etc. Technically still allowed but [discouraged](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.1) 
 by the current specification, if used in some tools or APIs this may lead to errors or the additional values being ignored. 
 The additional information should now be stored separately in the properties of the feature.
-[Example 1 - 3D coordinates](examples/problematic_geometries/problematic_3d_coordinates.geojson)
+[Example 1 - 3D coordinates](examples/problematic_geometries/problematic_3d_coordinates.geojson)  
+[Example 2 - 4D coordinates](examples/problematic_geometries/problematic_4d_coordinates.geojson)
 
 ### Outside latitude/longitude boundary
 The most recent GeoJSON specification defines GeoJSON as being in the [WGS84](https://en.wikipedia.org/wiki/World_Geodetic_System)
